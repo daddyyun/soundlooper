@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-export default class GameOfLife extends Component {
+export default class SoundLooper extends Component {
   constructor() {
     super()
   }
@@ -10,7 +10,7 @@ export default class GameOfLife extends Component {
     return (
       <div>
         <div>
-          <h3>Welcome To GAME OF LIFE</h3>
+          <h3>Welcome To Sound Looper</h3>
         </div>
       </div>
     );

@@ -8,10 +8,10 @@ export const HeadNav = () => {
         <h3><Link to="/">Home</Link></h3>
       </div>
       <div>
-        <h3><Link to="/gameOfLife">Game Of Life</Link></h3>
+        <h3><Link to="/soundLooper">Sound Looper</Link></h3>
       </div>
       <div>
-        <h3><Link to="/makeYourNoise">Make Your Noise</Link></h3>
+        <h3><Link to="/drawSound">Draw Sound</Link></h3>
       </div>
     </div>
   );

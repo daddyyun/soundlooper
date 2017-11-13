@@ -2374,80 +2374,7 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 };
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  audioContext: new AudioContext(),
-  oscillators: {
-    osc1: {},
-    osc2: {},
-    bass: {}
-  },
-
-  noteOff: function noteOff() {
-    for (var key in this.oscillators) {
-      this.oscillators[key].stop();
-    }
-  },
-
-  play: function play(note) {
-    var pitch = note;
-    for (var key in this.oscillators) {
-      this.oscillators[key] = this.audioContext.createOscillator();
-      this.oscillators[key].type = 'sawtooth';
-      this.oscillators[key].frequency.value = pitch;
-      this.oscillators[key].connect(this.audioContext.destination);
-      switch (key) {
-        case 'osc1':
-          this.oscillators[key].detune.value = 0;
-          break;
-        case 'osc2':
-          this.oscillators[key].detune.value = 15;
-          break;
-        case 'bass':
-          this.oscillators[key].frequency.value = pitch / 2;
-          this.oscillators[key].type = 'square';
-          break;
-      }
-      this.oscillators[key].start();
-    }
-  },
-
-  // notes: {
-  //   C4: 261.63,
-  //   Db4: 277.18,
-  //   D4: 293.66,
-  //   Eb4: 311.13,
-  //   E4: 329.63,
-  //   F4: 349.23,
-  //   Gb4: 369.99,
-  //   G4: 392.00,
-  //   Ab4: 415.30,
-  //   A4: 440.00,
-  //   Bb4: 466.16,
-  //   B4: 493.88
-  // }
-  notes: {
-    C4: 50,
-    Db4: 150,
-    D4: 250,
-    Eb4: 311.13,
-    E4: 329.63,
-    F4: 349.23,
-    Gb4: 369.99,
-    G4: 392.00,
-    Ab4: 415.30,
-    A4: 700,
-    Bb4: 800,
-    B4: 900
-  }
-};
-
-/***/ }),
+/* 35 */,
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25691,17 +25618,13 @@ var _HeadNav = __webpack_require__(79);
 
 var _Welcome = __webpack_require__(80);
 
-var _GameOfLife = __webpack_require__(81);
+var _SoundLooper = __webpack_require__(81);
 
-var _GameOfLife2 = _interopRequireDefault(_GameOfLife);
+var _SoundLooper2 = _interopRequireDefault(_SoundLooper);
 
-var _MakeYourNoise = __webpack_require__(82);
+var _DrawSound = __webpack_require__(82);
 
-var _MakeYourNoise2 = _interopRequireDefault(_MakeYourNoise);
-
-var _Example = __webpack_require__(84);
-
-var _Example2 = _interopRequireDefault(_Example);
+var _DrawSound2 = _interopRequireDefault(_DrawSound);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25712,8 +25635,7 @@ var Main = exports.Main = function Main() {
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(_HeadNav.HeadNav, null),
-      _react2.default.createElement(_Example2.default, null)
+      _react2.default.createElement(_HeadNav.HeadNav, null)
     ),
     _react2.default.createElement(
       'div',
@@ -25721,8 +25643,8 @@ var Main = exports.Main = function Main() {
       _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/gameOfLife', component: _GameOfLife2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/makeYourNoise', component: _MakeYourNoise2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/soundLooper', component: _SoundLooper2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/drawSound', component: _DrawSound2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { component: _Welcome.Welcome })
       )
     )
@@ -25774,8 +25696,8 @@ var HeadNav = exports.HeadNav = function HeadNav() {
         null,
         _react2.default.createElement(
           _reactRouterDom.Link,
-          { to: '/gameOfLife' },
-          'Game Of Life'
+          { to: '/soundLooper' },
+          'Sound Looper'
         )
       )
     ),
@@ -25787,8 +25709,8 @@ var HeadNav = exports.HeadNav = function HeadNav() {
         null,
         _react2.default.createElement(
           _reactRouterDom.Link,
-          { to: '/makeYourNoise' },
-          'Make Your Noise'
+          { to: '/drawSound' },
+          'Draw Sound'
         )
       )
     )
@@ -25825,24 +25747,6 @@ var Welcome = exports.Welcome = function Welcome() {
         null,
         'Welcome To My App'
       )
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        'h3',
-        null,
-        'Game Of Life - Never Ending'
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        'h3',
-        null,
-        'Make Your Noise - YaY'
-      )
     )
   );
 };
@@ -25872,16 +25776,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var GameOfLife = function (_Component) {
-  _inherits(GameOfLife, _Component);
+var SoundLooper = function (_Component) {
+  _inherits(SoundLooper, _Component);
 
-  function GameOfLife() {
-    _classCallCheck(this, GameOfLife);
+  function SoundLooper() {
+    _classCallCheck(this, SoundLooper);
 
-    return _possibleConstructorReturn(this, (GameOfLife.__proto__ || Object.getPrototypeOf(GameOfLife)).call(this));
+    return _possibleConstructorReturn(this, (SoundLooper.__proto__ || Object.getPrototypeOf(SoundLooper)).call(this));
   }
 
-  _createClass(GameOfLife, [{
+  _createClass(SoundLooper, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -25893,17 +25797,17 @@ var GameOfLife = function (_Component) {
           _react2.default.createElement(
             'h3',
             null,
-            'Welcome To GAME OF LIFE'
+            'Welcome To Sound Looper'
           )
         )
       );
     }
   }]);
 
-  return GameOfLife;
+  return SoundLooper;
 }(_react.Component);
 
-exports.default = GameOfLife;
+exports.default = SoundLooper;
 ;
 
 /***/ }),
@@ -25923,9 +25827,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SoundButton = __webpack_require__(83);
-
-var _SoundButton2 = _interopRequireDefault(_SoundButton);
+var _reactRouterDom = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25935,35 +25837,58 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var synth = __webpack_require__(35);
+var DrawSound = function (_Component) {
+  _inherits(DrawSound, _Component);
 
-var MakeYourNoise = function (_Component) {
-  _inherits(MakeYourNoise, _Component);
+  function DrawSound() {
+    _classCallCheck(this, DrawSound);
 
-  function MakeYourNoise() {
-    _classCallCheck(this, MakeYourNoise);
+    var _this = _possibleConstructorReturn(this, (DrawSound.__proto__ || Object.getPrototypeOf(DrawSound)).call(this));
 
-    var _this = _possibleConstructorReturn(this, (MakeYourNoise.__proto__ || Object.getPrototypeOf(MakeYourNoise)).call(this));
-
-    _this.state = { x: 0, y: 0 };
+    _this.state = {
+      mode: 'points'
+    };
+    _this.audioContext = new AudioContext();
+    _this.onMouseDown = _this.onMouseDown.bind(_this);
     _this.onMouseMove = _this.onMouseMove.bind(_this);
+    _this.play = _this.play.bind(_this);
     return _this;
   }
 
-  _createClass(MakeYourNoise, [{
+  _createClass(DrawSound, [{
+    key: 'play',
+    value: function play(note, vol, detune) {
+      var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'sine';
+
+      var osc = this.audioContext.createOscillator();
+      var gain = this.audioContext.createGain();
+      osc.frequency.value = note;
+      osc.detune.value = detune;
+      osc.connect(gain);
+      gain.connect(this.audioContext.destination);
+      osc.start();
+    }
+  }, {
+    key: 'onMouseDown',
+    value: function onMouseDown(event) {
+      var note = 200 + 2 * event.screenX;
+      var vol = 5 * event.screenY / 12;
+      var detune = event.screenY * 2;
+      this.play(String(note), vol, detune);
+    }
+  }, {
     key: 'onMouseMove',
-    value: function onMouseMove(e) {
-      console.log('X = ', e.screenX, 'Y = ', e.screenY);
-      this.setState({ x: e.screenX, y: e.screenY });
-      synth.play(String(e.screenX));
+    value: function onMouseMove(event) {
+      var note = 200 + 2 * event.screenX;
+      var vol = 5 * event.screenY / 12;
+      var detune = event.screenY * 2;
+      this.play(String(note), vol, detune);
     }
   }, {
     key: 'render',
     value: function render() {
-      var x = this.state.x;
+      var _this2 = this;
 
-      console.log('X in render = ', x);
-      var xStr = x.toString();
       return _react2.default.createElement(
         'div',
         null,
@@ -25971,100 +25896,48 @@ var MakeYourNoise = function (_Component) {
           'div',
           null,
           _react2.default.createElement(
-            'h3',
-            null,
-            'Welcome To MAKE YOUR NOISE'
+            'button',
+            {
+              className: 'pointsButton',
+              onClick: function onClick() {
+                return _this2.setState({ mode: 'points' });
+              }
+            },
+            'Points'
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              className: 'continuousButton',
+              onClick: function onClick() {
+                return _this2.setState({ mode: 'continuous' });
+              }
+            },
+            'Continuous'
           )
         ),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(
           'div',
-          { onMouseMove: this.onMouseMove },
-          _react2.default.createElement(_SoundButton2.default, { note: xStr })
-        )
-      );
-    }
-  }]);
-
-  return MakeYourNoise;
-}(_react.Component);
-
-exports.default = MakeYourNoise;
-;
-
-/***/ }),
-/* 83 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var synth = __webpack_require__(35);
-
-var SoundButton = function (_Component) {
-  _inherits(SoundButton, _Component);
-
-  function SoundButton(props) {
-    _classCallCheck(this, SoundButton);
-
-    var _this = _possibleConstructorReturn(this, (SoundButton.__proto__ || Object.getPrototypeOf(SoundButton)).call(this, props));
-
-    _this.playNote = _this.playNote.bind(_this);
-    _this.stopNote = _this.stopNote.bind(_this);
-    return _this;
-  }
-
-  _createClass(SoundButton, [{
-    key: 'playNote',
-    value: function playNote() {
-      console.log(this.props.note);
-      synth.play(this.props.note);
-    }
-  }, {
-    key: 'stopNote',
-    value: function stopNote() {
-      synth.noteOff();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'div',
-          {
-            onClick: this.playNote
-            // onMouseDown={this.playNote}
-            // onMouseUp={this.stopNote}
-            // onMouseLeave={this.stopNote}
-          },
-          'Start'
+          null,
+          this.state.mode === 'points' ? _react2.default.createElement('img', {
+            src: 'http://www.fnordware.com/superpng/pnggrad16rgb.png',
+            className: 'pad',
+            onMouseDown: this.onMouseDown
+          }) : _react2.default.createElement('img', {
+            src: 'http://www.fnordware.com/superpng/pnggrad16rgb.png',
+            className: 'pad',
+            onMouseMove: this.onMouseMove
+          })
         ),
+        _react2.default.createElement('br', null),
         _react2.default.createElement(
-          'div',
+          'button',
           {
-            onClick: this.stopNote
-            // onMouseDown={this.playNote}
-            // onMouseUp={this.stopNote}
-            // onMouseLeave={this.stopNote}
+            className: 'stopButton',
+            onClick: function onClick() {
+              return window.location.reload(true);
+            }
           },
           'Stop'
         )
@@ -26072,80 +25945,11 @@ var SoundButton = function (_Component) {
     }
   }]);
 
-  return SoundButton;
+  return DrawSound;
 }(_react.Component);
 
-exports.default = SoundButton;
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Example = function (_Component) {
-  _inherits(Example, _Component);
-
-  function Example(props) {
-    _classCallCheck(this, Example);
-
-    var _this = _possibleConstructorReturn(this, (Example.__proto__ || Object.getPrototypeOf(Example)).call(this, props));
-
-    _this.state = { x: 0, y: 0 };
-    _this.onMouseMove = _this.onMouseMove.bind(_this);
-    return _this;
-  }
-
-  _createClass(Example, [{
-    key: 'onMouseMove',
-    value: function onMouseMove(e) {
-      this.setState({ x: e.screenX, y: e.screenY });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _state = this.state,
-          x = _state.x,
-          y = _state.y;
-
-      return _react2.default.createElement(
-        'div',
-        { onMouseMove: this.onMouseMove },
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Mouse coordinates: ',
-          x,
-          ' ',
-          y
-        )
-      );
-    }
-  }]);
-
-  return Example;
-}(_react.Component);
-
-exports.default = Example;
+exports.default = DrawSound;
+;
 
 /***/ })
 /******/ ]);
