@@ -18,5 +18,5 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 app.get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
 
 app.listen(3000, () => {
-  console.log('Server is LISTENING');
+  console.log('Server is LISTENING @3000');
 });
